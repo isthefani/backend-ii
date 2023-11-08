@@ -2,6 +2,7 @@ package com.atividadecrudspringjpa.crud.controller;
 
 
 import com.atividadecrudspringjpa.crud.model.Produto;
+import com.atividadecrudspringjpa.crud.model.dtos.ProdutoDTO;
 import com.atividadecrudspringjpa.crud.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,13 +19,14 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<String> insert(@RequestBody Produto produto){
-        Produto prod = produtoService.insert(produto);
-        return prod !=  null ?
+    public ResponseEntity<String> insert(@RequestBody ProdutoDTO produtoDTO){
+        ProdutoDTO prodDTO = produtoService.insert(produtoDTO);
+        return prodDTO !=  null ?
                 new ResponseEntity<>("Produto criado com sucesso", HttpStatus.CREATED)
                 :
                 new ResponseEntity<>("Erro ao criar produto", HttpStatus.BAD_REQUEST);
     }
+
     @GetMapping
     public ResponseEntity<List<Produto>> findAll(){
         List<Produto> list = produtoService.findAllProduto();

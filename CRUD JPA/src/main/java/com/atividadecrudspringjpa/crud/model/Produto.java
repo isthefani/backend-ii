@@ -2,6 +2,8 @@ package com.atividadecrudspringjpa.crud.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "produtos")
 public class Produto {
@@ -41,5 +43,27 @@ public class Produto {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, preco);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Produto other = (Produto) obj;
+        return Objects.equals(id, other.id) && Objects.equals(nome, other.nome) && Objects.equals(preco, other.preco);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + "]";
     }
 }
